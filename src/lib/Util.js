@@ -95,7 +95,7 @@ export class SuperMusicController {
 
     play(info=null) {
 
-        if (this.isInit) { info = this.currentMusic; this.isInit = false; }
+        if (this.isInit && info === null) { info = this.currentMusic; this.isInit = false; }
 
         if (!info) {
             if (!this.currentMusic.sid) return;
