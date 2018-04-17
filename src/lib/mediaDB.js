@@ -71,13 +71,14 @@ class mediaDB {
             storingObj[`extra`] = extra;
         let cb = callback;
         let that = this;
+        let mine = this.mine;
         
         if (data && typeof data === "object" && data.constructor === Blob) {
 
             return new Promise((resolve, reject) => {
                 that.blobToArrayBuffer(data, (type, array) => {
                     storingObj[`data`] = array;
-                    storingObj[`datatype`] = type;
+                    storingObj[`datatype`] = mine === "image" ? "image/jpg" : (type.includes("octet-stream") ? "audio/mp4" : type);
                     let store = that.startDB()[0];
                     let req = store.put(storingObj);
                     req.onsuccess = () => {
@@ -147,7 +148,8 @@ class mediaDB {
 
     }
 
-    loadMedia(dom, data, callback) {
+    loadMedia(dom=null, data, callback) {
+        if (dom === null) {callback(window.URL.createObjectURL(data)); return;}
         if (dom.tagName.toLocaleLowerCase() in {audio:1, image:1, video:1}) {
             dom.src = window.URL.createObjectURL(data);
         } else {
@@ -156,9 +158,9 @@ class mediaDB {
         callback(dom);
     }
 
-    loadFile(dom, id, name, url="", extra={}, callback=()=>{}) {
+    loadFile(dom=null, id, name, url="", extra={}, callback=()=>{}) {
 
-        if (!dom || !id || !name) this.raiseError("Not Enough Parameters.");
+        if (!id || !name) this.raiseError("Not Enough Parameters.");
         // if (typeof a != "object" || !a.tagName) this.raiseError("Please Input a DOM");
 
         this.get(id)

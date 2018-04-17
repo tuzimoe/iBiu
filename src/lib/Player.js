@@ -11,7 +11,7 @@ import PauseIcon from 'material-ui-icons/Pause';
 import SkipPreviousIcon from 'material-ui-icons/SkipPrevious';
 import SkipNextIcon from 'material-ui-icons/SkipNext';
 
-import { MusicController } from './Util';
+import { MusicController, picDB } from './Util';
 
 function Transition(props) {
     return <Slide direction="up" {...props} />;
@@ -60,21 +60,27 @@ export class Player extends Component {
     updateView() {
         this.setState({
             title: MusicController.currentMusic.title,
-            cover: MusicController.currentMusic.sid ? 
-                    `https://biu.moe/Song/showCover/sid/${MusicController.currentMusic.sid}` :
-                    "/icon.png",
             playing: MusicController.player.paused ? 0 : 1,
             completed: parseInt(MusicController.player.currentTime, 10),
             total: MusicController.currentMusic.length,
             playState: MusicController.state
         });
 
-        // if (MusicController.currentMusic.sid)
-        // picDB.loadFile(document.getElementById("playerCover"),
-        //     parseInt(MusicController.currentMusic.sid, 10), 
-        //     MusicController.currentMusic.title, 
-        //     `https://biu.moe/Song/showCover/sid/${MusicController.currentMusic.sid}`, 
-        //     MusicController.currentMusic, image => {});
+        if (MusicController.currentMusic.sid && document.getElementById("playerCover") && this.coverReq !== MusicController.currentMusic.sid) {
+            this.coverReq = MusicController.currentMusic.sid;
+            picDB.loadFile(null,
+                parseInt(MusicController.currentMusic.sid, 10), 
+                MusicController.currentMusic.title, 
+                `https://biu.moe/Song/showCover/sid/${MusicController.currentMusic.sid}`, 
+                MusicController.currentMusic, image => {
+                    this.setState({cover: image})
+                });
+        }
+    }
+
+    constructor(props) {
+        super(props);
+        this.coverReq = false;
     }
 
     componentDidMount() {
@@ -100,7 +106,7 @@ export class Player extends Component {
             className="player"
             >
                 <h1 style={{overflowX: "hidden", marginBottom: ".6em"}}>{this.state.title}</h1>
-                <img className="playerCover" src={this.state.cover} alt="cover"/>
+                <img id="playerCover" className="playerCover" src={this.state.cover} alt="cover"/>
                 <LinearProgress style={{width: "90%", margin: "2em auto", marginBottom: ".2em"}} color="secondary" variant={this.state.playState === 2 ? "indeterminate" : "determinate"} value={Math.round(100 * this.state.completed / this.state.total)} />
                 <div style={{width: "90%", margin: ".8em auto", color: "#888"}}>
                     <span>{this.toTime(this.state.completed)}</span>

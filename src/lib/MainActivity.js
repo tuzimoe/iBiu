@@ -18,7 +18,7 @@ import { Playlist } from './Playlist';
 import { Dashboard } from './Dashboard';
 import { Player } from './Player';
 import { Login } from './Login';
-import { Me, getMe, getCollects, MusicController } from './Util';
+import { picDB, Me, getMe, getCollects, MusicController } from './Util';
 
 function TabContainer({ children, dir }) {
     return (
@@ -61,6 +61,11 @@ class FullWidthTabs extends Component {
         cover: "/icon.png",
         playState: 0
     };
+
+    constructor(props) {
+        super(props);
+        this.coverReq = false;
+    }
 
     logined = () => {
         getCollects((state, data) => {
@@ -129,6 +134,17 @@ class FullWidthTabs extends Component {
             playState: MusicController.state
         });
 
+        if (MusicController.currentMusic.sid && document.getElementById("smallCover") && this.coverReq !== MusicController.currentMusic.sid) {
+            this.coverReq = MusicController.currentMusic.sid;
+            picDB.loadFile(null,
+                parseInt(MusicController.currentMusic.sid, 10), 
+                MusicController.currentMusic.title, 
+                `https://biu.moe/Song/showCover/sid/${MusicController.currentMusic.sid}`, 
+                MusicController.currentMusic, image => {
+                    this.setState({cover: image})
+                });
+        }
+
     }
 
     openPlayer = () => {
@@ -174,6 +190,7 @@ class FullWidthTabs extends Component {
                 <Player ref={(r) => {this._player = r;}}/>
                 <Login ref={(r) => {this._login = r;}} snack={this.openSnack.bind(this)} logined={this.logined.bind(this)}/>
                 <Button 
+                    id="smallCover"
                     className={classes.player} 
                     onClick={() => {this._player.handleClickOpen();}}
                     variant="fab"
