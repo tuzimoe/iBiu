@@ -183,7 +183,7 @@ class FullWidthTabs extends Component {
                             backgroundSize: "cover",
                             width: 60,
                             height: 60}}>
-                    <CircularProgress size={77} style={{
+                    <CircularProgress size={72} style={{
                         position: 'absolute',
                         top: -6,
                         left: -6,
