@@ -113,15 +113,15 @@ export class SuperMusicController {
             this.currentMusic.src = data.url;
             this.state = 2;
 
-            this.player.src = data.url;
-            if (this.player.paused) this.player.play();
-            this.state = 1;
+            // this.player.src = data.url;
+            // if (this.player.paused) this.player.play();
+            // this.state = 1;
             // this.pause();
             
-            // biuDB.loadFile(this.player, parseInt(this.currentMusic.sid, 10), this.currentMusic.title, this.currentMusic.src, this.currentMusic, audio => {
-            //     this.player.play();
-            //     this.state = 1;
-            // });
+            biuDB.loadFile(this.player, parseInt(this.currentMusic.sid, 10), this.currentMusic.title, this.currentMusic.src, this.currentMusic, audio => {
+                if (this.player.paused) this.player.play();
+                this.state = 1;
+            });
 
             savePlayInfo(this.list, this.currentMusic, this.currentNum);
             
