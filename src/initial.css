@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Ubuntu:700');
+@import url('https://fonts.loli.net/css?family=Ubuntu:700');
 
 html, body, #root {
     height: 100%;
@@ -80,7 +80,7 @@ div {
     margin: 0 auto;
     border-radius: 10px;
     box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
-    margin-bottom: .8em;
+    margin-bottom: .6em;
 }
 
 .biuLogo {

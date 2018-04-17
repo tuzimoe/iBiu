@@ -99,7 +99,7 @@ export class Player extends Component {
             style={{zIndex: 900}}
             className="player"
             >
-                <h1 style={{overflowX: "hidden", marginBottom: ".8em"}}>{this.state.title}</h1>
+                <h1 style={{overflowX: "hidden", marginBottom: ".6em"}}>{this.state.title}</h1>
                 <img className="playerCover" src={this.state.cover} alt="cover"/>
                 <LinearProgress style={{width: "90%", margin: "2em auto", marginBottom: ".2em"}} color="secondary" variant={this.state.playState === 2 ? "indeterminate" : "determinate"} value={Math.round(100 * this.state.completed / this.state.total)} />
                 <div style={{width: "90%", margin: ".8em auto", color: "#888"}}>
