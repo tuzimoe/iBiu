@@ -92,6 +92,36 @@ export class SuperMusicController {
         if (!this.player.paused) this.player.pause();
     }
 
+    preload(info=null) {
+
+        if (this.isInit && info === null) { info = this.currentMusic; this.isInit = false; }
+
+        this.state = 2;
+        let param = {
+            token: Me.token,
+            sid: info.sid
+        };
+        HttpRequest("/Song/get_url", param, (status, data) => {
+            this.currentMusic = info;
+            this.currentMusic.src = data.url;
+            this.state = 2;
+
+            // this.player.src = data.url;
+            // if (this.player.paused) this.player.play();
+            // this.state = 1;
+            // this.pause();
+            
+            let type = this.currentMusic.src.includes(".mp3") ? "audio/mpeg" : "audio/mp4";
+            biuDB.loadFile(this.player, parseInt(this.currentMusic.sid, 10), this.currentMusic.title, this.currentMusic.src, this.currentMusic, type, audio => {
+                this.state = 1;
+            });
+
+            savePlayInfo(this.list, this.currentMusic, this.currentNum);
+            
+        });
+
+    }
+
     play(info=null) {
 
         if (this.isInit && info === null) { info = this.currentMusic; this.isInit = false; }
@@ -100,6 +130,7 @@ export class SuperMusicController {
             if (!this.currentMusic.sid) return;
             if (this.player.paused) this.player.play();
             this.state = 1;
+            this.setSession();
             return;
         }
         if (this.state === 2) return;
@@ -118,14 +149,36 @@ export class SuperMusicController {
             // this.state = 1;
             // this.pause();
             
-            biuDB.loadFile(this.player, parseInt(this.currentMusic.sid, 10), this.currentMusic.title, this.currentMusic.src, this.currentMusic, audio => {
+            let type = this.currentMusic.src.includes(".mp3") ? "audio/mpeg" : "audio/mp4";
+            biuDB.loadFile(this.player, parseInt(this.currentMusic.sid, 10), this.currentMusic.title, this.currentMusic.src, this.currentMusic, type, audio => {
                 if (this.player.paused) this.player.play();
                 this.state = 1;
+                this.setSession();
             });
 
             savePlayInfo(this.list, this.currentMusic, this.currentNum);
             
         });
+    }
+
+    setSession() {
+        if ('mediaSession' in window.navigator && 'MediaMetadata' in window) {
+
+            window.navigator.mediaSession.metadata = new window.MediaMetadata({
+                title: this.currentMusic.title,
+                artist: this.currentMusic.singer || "Biu",
+                album: this.currentMusic.album || "iBiu",
+                artwork: [
+                    { src: `https://biu.moe/Song/showCover/sid/${this.currentMusic.sid}`, sizes: '128x128', type: 'image/jpeg' },
+                ]
+            });
+            
+            let that = this;
+            window.navigator.mediaSession.setActionHandler('play', function() {that.play();});
+            window.navigator.mediaSession.setActionHandler('pause', function() {that.pause();});
+            window.navigator.mediaSession.setActionHandler('previoustrack', function() {that.playControl(-1);});
+            window.navigator.mediaSession.setActionHandler('nexttrack', function() {that.playControl(1);});
+        }
     }
 
 }

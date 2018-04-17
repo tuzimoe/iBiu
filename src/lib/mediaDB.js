@@ -61,7 +61,7 @@ class mediaDB {
         return new Blob([array], {type: type});
     }
 
-    put(id, name="", data=new Blob(), extra={}, callback) {
+    put(id, name="", data=new Blob(), extra={}, preferedType="", callback) {
 
         if (typeof id !== "number") this.raiseError("Invalid id.");
         
@@ -71,14 +71,13 @@ class mediaDB {
             storingObj[`extra`] = extra;
         let cb = callback;
         let that = this;
-        let mine = this.mine;
         
         if (data && typeof data === "object" && data.constructor === Blob) {
 
             return new Promise((resolve, reject) => {
                 that.blobToArrayBuffer(data, (type, array) => {
                     storingObj[`data`] = array;
-                    storingObj[`datatype`] = mine === "image" ? "image/jpg" : (type.includes("octet-stream") ? "audio/mp4" : type);
+                    storingObj[`datatype`] = preferedType === "" ? type : preferedType;
                     let store = that.startDB()[0];
                     let req = store.put(storingObj);
                     req.onsuccess = () => {
@@ -94,7 +93,7 @@ class mediaDB {
 
             return new Promise((resolve, reject) => {
                 that.retriveFromNet(data).then((blob) => {
-                    that.put(id, name, blob, extra, callback)
+                    that.put(id, name, blob, extra, preferedType, callback)
                         .then(resolve);
                 });
             });
@@ -158,7 +157,7 @@ class mediaDB {
         callback(dom);
     }
 
-    loadFile(dom=null, id, name, url="", extra={}, callback=()=>{}) {
+    loadFile(dom=null, id, name, url="", extra={}, preferedType="", callback=()=>{}) {
 
         if (!id || !name) this.raiseError("Not Enough Parameters.");
         // if (typeof a != "object" || !a.tagName) this.raiseError("Please Input a DOM");
@@ -167,7 +166,7 @@ class mediaDB {
             .then((res) => {
                 if (!res) {
                     if (!url) this.raiseError("No Such File!");
-                    this.put(id, name, url, extra)
+                    this.put(id, name, url, extra, preferedType)
                         .then(info => {
                             this.loadMedia(dom, info.data, callback);
                         })

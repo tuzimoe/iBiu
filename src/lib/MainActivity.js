@@ -140,6 +140,7 @@ class FullWidthTabs extends Component {
                 parseInt(MusicController.currentMusic.sid, 10), 
                 MusicController.currentMusic.title, 
                 `https://biu.moe/Song/showCover/sid/${MusicController.currentMusic.sid}`, 
+                "image/jpeg",
                 MusicController.currentMusic, image => {
                     this.setState({cover: image})
                 });

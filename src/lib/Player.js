@@ -3,7 +3,7 @@ import Button from 'material-ui/Button';
 import Dialog from 'material-ui/Dialog';
 import IconButton from 'material-ui/IconButton';
 import Slide from 'material-ui/transitions/Slide';
-import { LinearProgress } from 'material-ui/Progress';
+import { LinearProgress, CircularProgress } from 'material-ui/Progress';
 
 import CloseIcon from 'material-ui-icons/Close';
 import PlayArrowIcon from 'material-ui-icons/PlayArrow';
@@ -46,6 +46,7 @@ export class Player extends Component {
     }
 
     play() {
+        if (this.state.playState === 2) return;
         if (MusicController.player.paused) {
             MusicController.play();
         } else { 
@@ -71,7 +72,8 @@ export class Player extends Component {
             picDB.loadFile(null,
                 parseInt(MusicController.currentMusic.sid, 10), 
                 MusicController.currentMusic.title, 
-                `https://biu.moe/Song/showCover/sid/${MusicController.currentMusic.sid}`, 
+                `https://biu.moe/Song/showCover/sid/${MusicController.currentMusic.sid}`,
+                "image/jpeg",
                 MusicController.currentMusic, image => {
                     this.setState({cover: image})
                 });
@@ -81,6 +83,7 @@ export class Player extends Component {
     constructor(props) {
         super(props);
         this.coverReq = false;
+        MusicController.preload();
     }
 
     componentDidMount() {
@@ -124,7 +127,7 @@ export class Player extends Component {
                         <SkipPreviousIcon />
                     </IconButton>
                     <IconButton onClick={this.play.bind(this)} aria-label="Play" style={{color: "white",width: 60,height: 60, marginLeft: 15}}>
-                        {this.state.playing === 1 ? <PauseIcon /> : <PlayArrowIcon />}
+                        {this.state.playState === 2 ? <CircularProgress color="secondary" /> : (this.state.playing === 1 ? <PauseIcon /> : <PlayArrowIcon />)}
                     </IconButton>
                     <IconButton onClick={this.next.bind(this)} aria-label="SkipNext" style={{color: "white",width: 60,height: 60, marginLeft: 15}}>
                         <SkipNextIcon />
