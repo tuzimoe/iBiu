@@ -47,6 +47,10 @@ class UserCard extends Component {
         
     };
 
+    about() {
+        this.props.snack("作者: 響喵，有什么问题可以直接来 Biu 群找我哦~");
+    }
+
     render() {return (
         <div>
             <div style={{
@@ -136,7 +140,7 @@ class UserCard extends Component {
                 </List>
                 <List component="nav">
                     <h2 style={{marginLeft: "1em"}}>关于</h2>
-                    <ListItem button>
+                    <ListItem button onClick={this.about.bind(this)}>
                         <ListItemIcon>
                             <InfoIcon />
                         </ListItemIcon>
@@ -155,7 +159,8 @@ export class Dashboard extends Component {
         return (
             <div>
                 <h1>Dashboard</h1>
-                <UserCard></UserCard>
+                <UserCard snack={this.props.snack}></UserCard>
+                <div style={{marginBottom: "3em"}}></div>
             </div>
     )};
 }

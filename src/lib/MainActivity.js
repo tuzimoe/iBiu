@@ -156,7 +156,7 @@ class FullWidthTabs extends Component {
                 >
                     <TabContainer dir={theme.direction}><Stage player={this.openPlayer.bind(this)}/></TabContainer>
                     <TabContainer dir={theme.direction}><Playlist player={this.openPlayer.bind(this)} ref={r => {this._playlist = r}}/></TabContainer>
-                    <TabContainer dir={theme.direction}><Dashboard /></TabContainer>
+                    <TabContainer dir={theme.direction}><Dashboard snack={this.openSnack.bind(this)}/></TabContainer>
                 </SwipeableViews>
                 <AppBar position="static" color="default" className={classes.bar}>
                     <Tabs

@@ -106,6 +106,7 @@ export class Stage extends Component {
                         <Cover size={90} /> <Cover size={90} /> <Cover size={90} />
                     </div>
                 </div>
+                <div style={{marginBottom: "3em"}}></div>
             </div>
     )};
 }
