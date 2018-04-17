@@ -1,0 +1,122 @@
+@import url('https://fonts.googleapis.com/css?family=Ubuntu:700');
+
+html, body, #root {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    display: block;
+    font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+}
+
+h1 {
+    white-space: pre;
+    text-overflow: ellipsis;
+    font-size: 2.4em;
+    margin-left: .3em;
+    margin-top: 2em;
+    margin-bottom: 1.3em;
+    color: #333;
+    font-family: "Ubuntu", "Roboto", "Helvetica", "Arial", sans-serif;
+}
+
+h2 {
+    white-space: pre;
+    text-overflow: ellipsis;
+    font-size: 1.4em;
+    margin-left: .3em;
+    margin-top: 1em;
+    margin-bottom: .8em;
+    color: #666;
+    font-family: "Ubuntu", "Roboto", "Helvetica", "Arial", sans-serif;
+}
+
+.divList h2 {
+    border-left: 5px solid #0021ff;
+    padding-left: 10px;
+}
+
+input {
+    font-family: "Ubuntu", "Roboto", "Helvetica", "Arial", sans-serif;;
+}
+
+::-webkit-input-placeholder { color: rgba(255, 255, 255, 0.6); }
+
+.clickable {
+    transition: .2s linear;
+}
+
+.clickable:hover {
+    transform: translateY(3px);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+}
+
+div {
+    background: transparent;
+}
+
+.player, .login {
+    width: 100%;
+    padding: 0;
+    margin: 0;
+}
+
+.player > div {
+    background: #FAFAFA;
+}
+
+.login > div {
+    background: #0021ff;
+}
+
+.player h1 {
+    margin: 1em;
+    text-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
+}
+
+.playerCover {
+    width: 320px;
+    height: 320px;
+    margin: 0 auto;
+    border-radius: 10px;
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
+    margin-bottom: 1em;
+}
+
+.biuLogo {
+    width: 160px;
+    height: 160px;
+    margin: 25% auto;
+    margin-bottom: 0;
+}
+
+.coverWrapper {
+    display: inline-flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.pageContainer {
+    height: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.important, .important h3 {
+    color: rgb(255, 92, 116);
+}
+
+.lessImportant h3 {
+    color: #666;
+    font-size: 1em;
+}
+
+.oneLine h3, .oneLine p {
+    white-space: pre;
+    overflow-x: hidden;
+    text-overflow: ellipsis;
+}
+
+.react-swipeable-view-container {
+    height: 100%;
+}
