@@ -47,10 +47,11 @@ export class SuperMusicController {
     }
 
     onPlayEnds() {
+        if (this.state === 0) return;
         if (Settings.repeat) {
             this.player.play();
         } else if (Settings.shuffle) {
-            this.playControl(parseInt(Math.random() * this.list.length), 1);
+            this.playControl(parseInt(Math.random() * this.list.length, 10), 1);
         } else {
             this.playControl(1);
         }
@@ -64,8 +65,6 @@ export class SuperMusicController {
         if (this.currentNum < 0) this.currentNum += this.list.length;
         this.currentNum %= this.list.length;
         this.play(this.list[this.currentNum]);
-
-        console.log(this.list, this.currentNum);
 
     }
 
@@ -89,8 +88,8 @@ export class SuperMusicController {
     }
 
     pause() {
-        if (!this.player.paused) this.player.pause();
         this.state = 0;
+        if (!this.player.paused) this.player.pause();
     }
 
     play(info=null) {
@@ -112,13 +111,16 @@ export class SuperMusicController {
         HttpRequest("/Song/get_url", param, (status, data) => {
             this.currentMusic = info;
             this.currentMusic.src = data.url;
-            this.pause();
             this.state = 2;
+
+            this.player.src = data.url;
+            this.state = 1;
+            // this.pause();
             
-            biuDB.loadFile(this.player, parseInt(this.currentMusic.sid, 10), this.currentMusic.title, this.currentMusic.src, this.currentMusic, audio => {
-                this.player.play();
-                this.state = 1;
-            });
+            // biuDB.loadFile(this.player, parseInt(this.currentMusic.sid, 10), this.currentMusic.title, this.currentMusic.src, this.currentMusic, audio => {
+            //     this.player.play();
+            //     this.state = 1;
+            // });
 
             savePlayInfo(this.list, this.currentMusic, this.currentNum);
             

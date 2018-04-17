@@ -68,6 +68,13 @@ export class Player extends Component {
             total: MusicController.currentMusic.length,
             playState: MusicController.state
         });
+
+        // if (MusicController.currentMusic.sid)
+        // picDB.loadFile(document.getElementById("playerCover"),
+        //     parseInt(MusicController.currentMusic.sid, 10), 
+        //     MusicController.currentMusic.title, 
+        //     `https://biu.moe/Song/showCover/sid/${MusicController.currentMusic.sid}`, 
+        //     MusicController.currentMusic, image => {});
     }
 
     componentDidMount() {

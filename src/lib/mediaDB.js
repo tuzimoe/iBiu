@@ -30,7 +30,7 @@ class mediaDB {
         for (let m in this.mineName) {
             let mine = this.mineName[m];
             let theStore = db.createObjectStore(mine, {keyPath: `${mine}ID`});
-            let theIndex = theStore.createIndex("identifier", "name");
+                theStore.createIndex("identifier", "name");
         }
     }
 
@@ -78,7 +78,7 @@ class mediaDB {
                 that.blobToArrayBuffer(data, (type, array) => {
                     storingObj[`data`] = array;
                     storingObj[`datatype`] = type;
-                    let [store, index] = that.startDB();
+                    let store = that.startDB()[0];
                     let req = store.put(storingObj);
                     req.onsuccess = () => {
                         that.get(id).then(info => {
