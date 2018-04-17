@@ -96,6 +96,7 @@ export class SuperMusicController {
 
         if (this.isInit && info === null) { info = this.currentMusic; this.isInit = false; }
 
+        if (!info) return;
         this.state = 2;
         let param = {
             token: Me.token,
