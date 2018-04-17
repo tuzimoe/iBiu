@@ -114,6 +114,7 @@ export class SuperMusicController {
             this.state = 2;
 
             this.player.src = data.url;
+            if (this.player.paused) this.player.play();
             this.state = 1;
             // this.pause();
             

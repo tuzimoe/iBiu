@@ -110,7 +110,7 @@ export class Player extends Component {
                             bottom: 90,
                             left: 25,
                             background: "#2041ff",
-                            width: 255,
+                            width: 240,
                             borderRadius: 60,
                             boxShadow: "0 5px 25px rgba(0, 0, 0, 0.4)",
                             height: 60}}>
