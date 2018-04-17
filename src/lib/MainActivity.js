@@ -181,8 +181,8 @@ class FullWidthTabs extends Component {
                     aria-label="add"
                     style={{backgroundImage: `url(${this.state.cover})`,
                             backgroundSize: "cover",
-                            width: 65,
-                            height: 65}}>
+                            width: 60,
+                            height: 60}}>
                     <CircularProgress size={77} style={{
                         position: 'absolute',
                         top: -6,

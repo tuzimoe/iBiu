@@ -104,16 +104,16 @@ export class Player extends Component {
                             left: 25,
                             background: "#2041ff",
                             width: 255,
-                            borderRadius: 65,
+                            borderRadius: 60,
                             boxShadow: "0 5px 25px rgba(0, 0, 0, 0.4)",
-                            height: 65}}>
-                    <IconButton onClick={this.prev.bind(this)} aria-label="SkipPrevious" style={{color: "white",width: 65,height: 65, marginLeft: 15}}>
+                            height: 60}}>
+                    <IconButton onClick={this.prev.bind(this)} aria-label="SkipPrevious" style={{color: "white",width: 60,height: 60, marginLeft: 15}}>
                         <SkipPreviousIcon />
                     </IconButton>
-                    <IconButton onClick={this.play.bind(this)} aria-label="Play" style={{color: "white",width: 65,height: 65, marginLeft: 15}}>
+                    <IconButton onClick={this.play.bind(this)} aria-label="Play" style={{color: "white",width: 60,height: 60, marginLeft: 15}}>
                         {this.state.playing === 1 ? <PauseIcon /> : <PlayArrowIcon />}
                     </IconButton>
-                    <IconButton onClick={this.next.bind(this)} aria-label="SkipNext" style={{color: "white",width: 65,height: 65, marginLeft: 15}}>
+                    <IconButton onClick={this.next.bind(this)} aria-label="SkipNext" style={{color: "white",width: 60,height: 60, marginLeft: 15}}>
                         <SkipNextIcon />
                     </IconButton>
                 </div>
@@ -126,9 +126,9 @@ export class Player extends Component {
                             bottom: 90,
                             right: 25,
                             background: "#2041ff",
-                            width: 65,
+                            width: 60,
                             boxShadow: "0 5px 25px rgba(0, 0, 0, 0.4)",
-                            height: 65}}>
+                            height: 60}}>
                     <CloseIcon />
                 </Button>
             </Dialog>

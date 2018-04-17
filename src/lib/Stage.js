@@ -95,15 +95,15 @@ export class Stage extends Component {
                     <MyGridList />
                     <h2>最新歌曲</h2>
                     <div className="coverWrapper">
-                        <Cover size={100} /> <Cover size={100} /> <Cover size={100} />
-                        <Cover size={100} /> <Cover size={100} /> <Cover size={100} />
-                        <Cover size={100} /> <Cover size={100} /> <Cover size={100} />
+                        <Cover size={90} /> <Cover size={90} /> <Cover size={90} />
+                        <Cover size={90} /> <Cover size={90} /> <Cover size={90} />
+                        <Cover size={90} /> <Cover size={90} /> <Cover size={90} />
                     </div>
                     <h2>最热歌曲</h2>
                     <div className="coverWrapper">
-                        <Cover size={100} /> <Cover size={100} /> <Cover size={100} />
-                        <Cover size={100} /> <Cover size={100} /> <Cover size={100} />
-                        <Cover size={100} /> <Cover size={100} /> <Cover size={100} />
+                        <Cover size={90} /> <Cover size={90} /> <Cover size={90} />
+                        <Cover size={90} /> <Cover size={90} /> <Cover size={90} />
+                        <Cover size={90} /> <Cover size={90} /> <Cover size={90} />
                     </div>
                 </div>
             </div>
