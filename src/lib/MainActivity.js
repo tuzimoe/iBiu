@@ -175,6 +175,7 @@ class FullWidthTabs extends Component {
                     <TabContainer dir={theme.direction}><Playlist player={this.openPlayer.bind(this)} ref={r => {this._playlist = r}}/></TabContainer>
                     <TabContainer dir={theme.direction}><Dashboard snack={this.openSnack.bind(this)}/></TabContainer>
                 </SwipeableViews>
+                <Player ref={(r) => {this._player = r;}}/>
                 <AppBar position="static" color="default" className={classes.bar}>
                     <Tabs
                     value={this.state.value}
@@ -188,7 +189,6 @@ class FullWidthTabs extends Component {
                         <Tab className={classes.tab} label="关于我"  icon={<SupervisorAccountIcon />} />
                     </Tabs>
                 </AppBar>
-                <Player ref={(r) => {this._player = r;}}/>
                 <Login ref={(r) => {this._login = r;}} snack={this.openSnack.bind(this)} logined={this.logined.bind(this)}/>
                 <Button 
                     id="smallCover"
