@@ -12,7 +12,13 @@ class SingleGrid extends Component {
         cover: "/icon.png"
     }
 
+    constructor(props) {
+        super(props);
+        this.currentPic = null;
+    }
+
     loadPic(sid, title, info) {
+        this.currentPic = sid;
         picDB.loadFile(null,
             parseInt(sid, 10), 
             title, 
@@ -29,7 +35,8 @@ class SingleGrid extends Component {
         if (info === null) {
             info = { title: "Loading..." }
         } else {
-            this.loadPic(info.sid, info.title, info);
+            if (this.currentPic !== info.sid) 
+                this.loadPic(info.sid, info.title, info);
         }
         
         return (
