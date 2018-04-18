@@ -11,7 +11,11 @@ html, body, #root {
 
 html, body, #root, #root > div, #root > div > div, #root > div > div > div > div {
     overflow-y: hidden;
-    overscroll-behavior: contain;
+    overscroll-behavior: none;
+}
+
+div {
+    overscroll-behavior: none;
 }
 
 h1 {
@@ -128,5 +132,5 @@ div {
 
 .react-swipeable-view-container {
     height: 100%;
-    overscroll-behavior: contain;
+    overscroll-behavior: none;
 }
