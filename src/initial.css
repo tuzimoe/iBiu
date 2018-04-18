@@ -12,6 +12,7 @@ html, body, #root {
 html, body, #root, #root > div, #root > div > div, #root > div > div > div > div {
     overflow-y: hidden;
     overflow-x: visible;
+    -webkit-overflow-scrolling: touch;
     overscroll-behavior: none;
 }
 
@@ -131,5 +132,6 @@ div {
 
 .react-swipeable-view-container {
     height: 100%;
+    -webkit-overflow-scrolling: touch;
     overscroll-behavior: none;
 }
