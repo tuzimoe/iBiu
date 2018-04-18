@@ -9,11 +9,15 @@ html, body, #root {
     font-family: "Roboto", "Helvetica", "Arial", sans-serif;
 }
 
-html, body, #root, #root > div:not([role=dialog]), #root > div > div, #root > div > div > div > div {
+html, body, #root, #root > div > div, #root > div > div > div > div {
     overflow-y: hidden;
     overflow-x: visible;
     -webkit-overflow-scrolling: touch;
     overscroll-behavior: none;
+}
+
+body > div[role=dialog] {
+
 }
 
 div {
