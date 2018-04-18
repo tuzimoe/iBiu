@@ -110,6 +110,11 @@ class FullWidthTabs extends Component {
     };
 
     componentDidMount() {
+        this.openLoginPanel();
+        this.playerMonitor = setInterval(this.updateView.bind(this), 1000);
+    }
+
+    openLoginPanel() {
         if (!Me.token) {
             this._login.handleClickOpen();
         } else {
@@ -124,7 +129,6 @@ class FullWidthTabs extends Component {
                 }
             });
         }
-        this.playerMonitor = setInterval(this.updateView.bind(this), 1000);
     }
 
     componentWillUnmount() {
@@ -187,7 +191,7 @@ class FullWidthTabs extends Component {
                 >
                     <TabContainer dir={theme.direction}><Stage player={this.openPlayer.bind(this)} ref={r => {this._stage = r}}/></TabContainer>
                     <TabContainer dir={theme.direction}><Playlist player={this.openPlayer.bind(this)} ref={r => {this._playlist = r}}/></TabContainer>
-                    <TabContainer dir={theme.direction}><Dashboard snack={this.openSnack.bind(this)}/></TabContainer>
+                    <TabContainer dir={theme.direction}><Dashboard loginPanel={this.openLoginPanel.bind(this)} snack={this.openSnack.bind(this)}/></TabContainer>
                 </SwipeableViews>
                 <Player ref={(r) => {this._player = r;}}/>
                 <AppBar position="static" color="default" className={classes.bar}>

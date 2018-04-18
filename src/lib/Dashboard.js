@@ -51,6 +51,11 @@ class UserCard extends Component {
         this.props.snack("作者: 響喵，有什么问题可以直接来 Biu 群找我哦~");
     }
 
+    handleLogout() {
+        Me.clear();
+        this.props.loginPanel();
+    }
+
     render() {return (
         <div className="pageContainer">
             <div style={{
@@ -74,7 +79,7 @@ class UserCard extends Component {
                     <h5 style={{color: "#AAA", margin: "0 0", marginLeft: ".5em"}}>ID: {Me.uid}</h5>
                 </div>
                 <span style={{flex: 1}}></span>
-                <Button style={{color: "#ff4276", lineHeight: "45px", fontWeight: 900}} size="small" onClick={this.handleSnackClose}>Logout</Button>
+                <Button style={{color: "#ff4276", lineHeight: "45px", fontWeight: 900}} size="small" onClick={this.handleLogout.bind(this)}>Logout</Button>
             </div>
 
             <div className="settingList">
@@ -159,7 +164,7 @@ export class Dashboard extends Component {
         return (
             <div>
                 <h1>Dashboard</h1>
-                <UserCard snack={this.props.snack}></UserCard>
+                <UserCard snack={this.props.snack} loginPanel={this.props.loginPanel}></UserCard>
                 <div style={{
                     color: "#AAA",
                     fontSize: ".8em",

@@ -106,7 +106,7 @@ export class SuperMusicController {
             this.list = this.list.splice(0, this.currentNum + 1).concat([info]).concat(this.list);
         }
         this.playControl(1);
-        
+
     }
 
     preload(info=null) {
@@ -293,6 +293,7 @@ export class User {
         this.banCollect = "";
         if (isMe) {
             setMeInfoToStorage("", "", this.email, "");
+            localStorage.removeItem("ibiu_list");
         }
     }
 
