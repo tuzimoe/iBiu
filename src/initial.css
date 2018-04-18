@@ -9,8 +9,9 @@ html, body, #root {
     font-family: "Roboto", "Helvetica", "Arial", sans-serif;
 }
 
-#root, #root div {
-    /* overflow-y: hidden; */
+html, body, #root, #root > div, #root > div > div, #root > div > div > div > div {
+    overflow-y: hidden;
+    overscroll-behavior: contain;
 }
 
 h1 {
@@ -127,4 +128,5 @@ div {
 
 .react-swipeable-view-container {
     height: 100%;
+    overscroll-behavior: contain;
 }

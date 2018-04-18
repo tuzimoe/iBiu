@@ -160,6 +160,13 @@ export class Dashboard extends Component {
             <div>
                 <h1>Dashboard</h1>
                 <UserCard snack={this.props.snack}></UserCard>
+                <div style={{
+                    color: "#AAA",
+                    fontSize: ".8em",
+                    textAlign: "center",
+                    fontFamily: "sans-serif",
+                    marginTop: "2em"
+                }}>Build v0.2.1a.<br />Copyright Biu & YuunoHibiki 2018.</div>
                 <div style={{marginBottom: "5em"}}></div>
             </div>
     )};
