@@ -6,11 +6,15 @@ import List, { ListItem, ListItemIcon, ListItemText, } from 'material-ui/List';
 
 import KeyboardArrowUpIcon from 'material-ui-icons/KeyboardArrowUp';
 
-import {getOneCollect, MusicController} from './Util';
+import {getOneCollect, MusicController, picDB } from './Util';
 
 var showPlayer = null;
 
 export class Song extends Component {
+
+    state = {
+        cover: "/icon.png"
+    }
 
     onClickHandler() {
         MusicController.playList(this.props.list, this.props.i);
@@ -26,12 +30,24 @@ export class Song extends Component {
         return res;
     }
 
+    componentWillMount() {
+        let info = this.props.list[this.props.i];
+        picDB.loadFile(null,
+            parseInt(info.sid, 10), 
+            info.title, 
+            `https://biu.moe/Song/showCover/sid/${info.sid}`,
+            "image/jpeg",
+            info, image => {
+                this.setState({cover: image})
+            });
+    }
+
     render() {
         let {album, length, sid, singer, title} = this.props.list[this.props.i];
         return (
         <ListItem button onClick={this.onClickHandler.bind(this)} style={{paddingLeft: "3em"}}>
             <Avatar>
-                <img style={{width: "100%"}} src={`https://biu.moe/Song/showCover/sid/${sid}`} alt={sid}/>
+                <img style={{width: "100%"}} src={this.state.cover} alt={sid}/>
             </Avatar>
             <ListItemText className="oneLine" primary={title} secondary={`${this.toTime(length)} | ${singer} - ${album}`}/>
         </ListItem>
@@ -68,7 +84,20 @@ export class SongList extends Component {
 export class CollectItem extends Component {
 
     state = {
-        open: false
+        open: false,
+        cover: "/icon.png"
+    }
+
+    componentWillMount() {
+        let info = this.props.info;
+        picDB.loadFile(null,
+            -parseInt(info.lid, 10), 
+            info.title, 
+            `https://biu.moe/Collect/showCover/lid/${info.lid}`,
+            "image/jpeg",
+            info, image => {
+                this.setState({cover: image})
+            });
     }
 
     onClickHandler() {
@@ -86,7 +115,7 @@ export class CollectItem extends Component {
         }}>
             <ListItem button onClick={this.onClickHandler.bind(this)}>
                 <Avatar>
-                    <img style={{width: "100%"}} src={`https://biu.moe/Collect/showCover/lid/${lid}`} alt={lid}/>
+                    <img style={{width: "100%"}} src={this.state.cover} alt={lid}/>
                 </Avatar>
                 <ListItemText primary={title} secondary={`总计有 ${sids.length} 首喵~`}/>
             </ListItem>

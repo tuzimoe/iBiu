@@ -68,12 +68,14 @@ export class SuperMusicController {
 
     }
 
-    playList(list, order=-1) {
+    playList(list=null, order=-1) {
         
-        if (list.length < 1) return;
+        if (list) {
+            if (list.length < 1) return;
+            this.list = list;
+        }
         
-        this.list = list;
-        order %= list.length;
+        order %= this.list.length;
 
         if (order < 0) {
             this.currentNum = 0;
@@ -90,6 +92,21 @@ export class SuperMusicController {
     pause() {
         this.state = 0;
         if (!this.player.paused) this.player.pause();
+    }
+
+    append(info) {
+        let currentIndex = -1;
+        for (let i = 0; i < this.list.length; i++) {
+            if (parseInt(this.list[i].sid, 10) === parseInt(info.sid, 10)) currentIndex = i;
+        }
+
+        if (currentIndex >= 0) {
+            this.playList(null, currentIndex);
+        } else {
+            this.list = this.list.splice(0, this.currentNum + 1).concat([info]).concat(this.list);
+        }
+        this.playControl(1);
+        
     }
 
     preload(info=null) {
@@ -450,6 +467,26 @@ export var getOneCollect = (collect, callback) => {
     };
 
     HttpRequest('/Song/get', param, callback);
+}
+
+export var getHomeNew = (callback) => {
+    if (!Me.token) { callback(false, "Login Required!"); return; }
+
+    let param = {
+        token: Me.token
+    }
+
+    HttpRequest('/Index/new_songs', param, callback);
+}
+
+export var getHomeHot = (callback) => {
+    if (!Me.token) { callback(false, "Login Required!"); return; }
+
+    let param = {
+        token: Me.token
+    }
+
+    HttpRequest('/Index/good_songs', param, callback);
 }
 
 Me = new User();

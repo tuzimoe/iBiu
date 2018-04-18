@@ -18,7 +18,7 @@ import { Playlist } from './Playlist';
 import { Dashboard } from './Dashboard';
 import { Player } from './Player';
 import { Login } from './Login';
-import { picDB, Me, getMe, getCollects, MusicController } from './Util';
+import { picDB, Me, getMe, getCollects, MusicController, getHomeNew, getHomeHot } from './Util';
 
 function TabContainer({ children, dir }) {
     return (
@@ -83,6 +83,20 @@ class FullWidthTabs extends Component {
             collects.my.sort((a,b) => {return a.type < b.type});
             collects.others.sort((a,b) => {return a.type < b.type});
             this._playlist.setState({collects});
+        });
+        getHomeNew((state, data) => {
+            let newSongs = [];
+            for (let i = 0; i < 15; i++) {
+                if (i in data) newSongs.push(data[i]);
+            }
+            this._stage.setState({newSongs});
+        });
+        getHomeHot((state, data) => {
+            let hotSongs = [];
+            for (let i = 0; i < 15; i++) {
+                if (i in data) hotSongs.push(data[i]);
+            }
+            this._stage.setState({hotSongs});
         });
     }
 
@@ -171,7 +185,7 @@ class FullWidthTabs extends Component {
                     onChangeIndex={this.handleChangeIndex}
                     style={{ height: "100%", marginBottom: 60 }}
                 >
-                    <TabContainer dir={theme.direction}><Stage player={this.openPlayer.bind(this)}/></TabContainer>
+                    <TabContainer dir={theme.direction}><Stage player={this.openPlayer.bind(this)} ref={r => {this._stage = r}}/></TabContainer>
                     <TabContainer dir={theme.direction}><Playlist player={this.openPlayer.bind(this)} ref={r => {this._playlist = r}}/></TabContainer>
                     <TabContainer dir={theme.direction}><Dashboard snack={this.openSnack.bind(this)}/></TabContainer>
                 </SwipeableViews>
