@@ -1,8 +1,8 @@
 import axios from 'axios';
 import mediaDB from './mediaDB';
 import qs from 'qs';
+import { BASEURL, API } from './Api';
 
-export const BASEURL = "https://biuandroid-ssl.smartgslb.com";
 export const YUUNOAPI = "https://api.yuuno.cc";
 export var Me = null;
 export var MusicController = null;
@@ -119,7 +119,7 @@ export class SuperMusicController {
             token: Me.token,
             sid: info.sid
         };
-        HttpRequest("/Song/get_url", param, (status, data) => {
+        HttpRequest(API.SongGetUrl, param, (status, data) => {
             this.currentMusic = info;
             this.currentMusic.src = data.url;
             this.state = 2;
@@ -157,7 +157,7 @@ export class SuperMusicController {
             sid: info.sid
         };
         this.state = 2;
-        HttpRequest("/Song/get_url", param, (status, data) => {
+        HttpRequest(API.SongGetUrl, param, (status, data) => {
             this.currentMusic = info;
             this.currentMusic.src = data.url;
             this.state = 2;
@@ -307,7 +307,7 @@ export class User {
             return;
         }
 
-        let uri = isMe ? "/User/me" : "/User/get";
+        let uri = isMe ? API.UserMe : API.UserGet;
         let param = isMe ? { token: this.token } : { uid: this.uid };
         HttpRequest(uri, param , (state, data) => {
             if (state) {
@@ -340,7 +340,7 @@ export class User {
             qq: this.qq,
             gender: this.gender
         }
-        HttpRequest("/User/change_info", postData, (state, data) => {
+        HttpRequest(API.UserChange, postData, (state, data) => {
             if (state) {
                 callback(true, this);
             } else {
@@ -378,7 +378,7 @@ export var login = (loginInfo, callback) => {
         password: Me.passwd,
     };
 
-    HttpRequest("/User/login", postData, (state, data) => {
+    HttpRequest(API.UserLogin, postData, (state, data) => {
         if (state) {
             Me.token = data.token;
             getMe(callback);
@@ -456,7 +456,7 @@ export var getCollects = (callback) => {
         token: Me.token,
         uid: Me.uid
     };
-    HttpRequest('/Collect/get', param, callback);
+    HttpRequest(API.CollectGet, param, callback);
 }
 
 export var getOneCollect = (collect, callback) => {
@@ -467,7 +467,7 @@ export var getOneCollect = (collect, callback) => {
         sid: collect.sids.join(",")
     };
 
-    HttpRequest('/Song/get', param, callback);
+    HttpRequest(API.SongGet, param, callback);
 }
 
 export var getHomeNew = (callback) => {
@@ -477,7 +477,7 @@ export var getHomeNew = (callback) => {
         token: Me.token
     }
 
-    HttpRequest('/Index/new_songs', param, callback);
+    HttpRequest(API.IndexNew, param, callback);
 }
 
 export var getHomeHot = (callback) => {
@@ -487,7 +487,7 @@ export var getHomeHot = (callback) => {
         token: Me.token
     }
 
-    HttpRequest('/Index/good_songs', param, callback);
+    HttpRequest(API.IndexHot, param, callback);
 }
 
 Me = new User();
