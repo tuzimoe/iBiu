@@ -293,7 +293,7 @@ export class User {
         this.banCollect = "";
         if (isMe) {
             setMeInfoToStorage("", "", this.email, "");
-            localStorage.removeItem("ibiu_list");
+            savePlayInfo([], 0, 0);
         }
     }
 

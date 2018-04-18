@@ -171,7 +171,7 @@ export class Dashboard extends Component {
                     textAlign: "center",
                     fontFamily: "sans-serif",
                     marginTop: "2em"
-                }}>Build v0.3.1b.<br />Copyright Biu & YuunoHibiki 2018.</div>
+                }}>Build v0.3.2a.<br />Copyright Biu & YuunoHibiki 2018.</div>
                 <div style={{marginBottom: "5em"}}></div>
             </div>
     )};
