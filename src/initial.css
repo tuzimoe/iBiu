@@ -9,6 +9,10 @@ html, body, #root {
     font-family: "Roboto", "Helvetica", "Arial", sans-serif;
 }
 
+#root, #root div {
+    /* overflow-y: hidden; */
+}
+
 h1 {
     white-space: pre;
     text-overflow: ellipsis;
@@ -117,6 +121,10 @@ div {
     text-overflow: ellipsis;
 }
 
+#root {
+    overflow: hidden;
+}
+
 .react-swipeable-view-container {
-    height: calc(100% + 10em);
+    height: 100%;
 }

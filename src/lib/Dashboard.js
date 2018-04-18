@@ -160,7 +160,7 @@ export class Dashboard extends Component {
             <div>
                 <h1>Dashboard</h1>
                 <UserCard snack={this.props.snack}></UserCard>
-                <div style={{marginBottom: "3em"}}></div>
+                <div style={{marginBottom: "5em"}}></div>
             </div>
     )};
 }

@@ -125,7 +125,7 @@ export class Playlist extends Component {
                         { this.state.collects.others.map(c => <CollectItem key={c.lid} info={c}/>)}
                     </List>
                 </div>
-                <div style={{marginBottom: "3em"}}></div>
+                <div style={{marginBottom: "5em"}}></div>
             </div>
     )};
 }
