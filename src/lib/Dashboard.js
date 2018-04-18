@@ -52,7 +52,7 @@ class UserCard extends Component {
     }
 
     render() {return (
-        <div>
+        <div className="pageContainer">
             <div style={{
                 width: "80%",
                 margin: "2em auto",
@@ -166,7 +166,7 @@ export class Dashboard extends Component {
                     textAlign: "center",
                     fontFamily: "sans-serif",
                     marginTop: "2em"
-                }}>Build v0.2.1a.<br />Copyright Biu & YuunoHibiki 2018.</div>
+                }}>Build v0.2.1b.<br />Copyright Biu & YuunoHibiki 2018.</div>
                 <div style={{marginBottom: "5em"}}></div>
             </div>
     )};

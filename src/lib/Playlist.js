@@ -114,7 +114,7 @@ export class Playlist extends Component {
     render() { 
         showPlayer = this.props.player;
         return (
-            <div>
+            <div className="pageContainer">
                 <h1>PlayList</h1>
                 <div className="settingList">
                     <List component="nav">
